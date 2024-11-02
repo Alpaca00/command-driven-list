@@ -8,13 +8,13 @@ Here’s an example of how your request to the dragAndDrop command might look:
   "jsonrpc": "2.0",
   "method": "dragAndDrop",
   "params": {
-    "startX": 100,
-    "startY": 200,
-    "endX": 300,
-    "endY": 400,
+    "startX": 205,
+    "startY": 116,
+    "endX": 0,
+    "endY": 172,
     "duration": 15000
   },
-  "id": 1
+  "id": "c6a5207b-5960-4e22-952c-ec83a3caa952"
 }
 ```
 
@@ -26,7 +26,7 @@ JSON-RPC Response Structure
   "result": {
     "success": true
   },
-  "id": 1
+  "id": "c6a5207b-5960-4e22-952c-ec83a3caa952"
 }
 ```
 
