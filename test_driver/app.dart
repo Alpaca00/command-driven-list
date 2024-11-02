@@ -7,5 +7,3 @@ void main() {
       commands: [DragCommandExtension()]);
   app.main();
 }
-
-// TODO: impl tests

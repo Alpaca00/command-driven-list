@@ -1,16 +1,45 @@
-# demo
+### Command Extension - flutter_driver
 
-A new Flutter project.
+Example JSON-RPC Request
+Here’s an example of how your request to the dragAndDrop command might look:
 
-## Getting Started
+```json
+{
+  "jsonrpc": "2.0",
+  "method": "dragAndDrop",
+  "params": {
+    "startX": 100,
+    "startY": 200,
+    "endX": 300,
+    "endY": 400,
+    "duration": 15000
+  },
+  "id": 1
+}
+```
 
-This project is a starting point for a Flutter application.
+JSON-RPC Response Structure
 
-A few resources to get you started if this is your first Flutter project:
+```json
+{
+  "jsonrpc": "2.0",
+  "result": {
+    "success": true
+  },
+  "id": 1
+}
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+#### Install Dependencies:
+
+```dart
+flutter clean
+flutter pub get
+```
+
+#### Build command
+
+```agsl
+flutter build apk --debug
+```
