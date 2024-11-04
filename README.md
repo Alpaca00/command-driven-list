@@ -1,12 +1,11 @@
 ### Command Extension - flutter_driver
 
 Example JSON-RPC Request
-Here’s an example of how your request to the dragAndDrop command might look:
 
 ```json
 {
   "jsonrpc": "2.0",
-  "method": "dragAndDrop",
+  "method": "dragAndDropWithCommandExtension",
   "params": {
     "startX": 205,
     "startY": 116,
@@ -14,7 +13,7 @@ Here’s an example of how your request to the dragAndDrop command might look:
     "endY": 172,
     "duration": 15000
   },
-  "id": "c6a5207b-5960-4e22-952c-ec83a3caa952"
+  "id": "1"
 }
 ```
 
@@ -26,7 +25,7 @@ JSON-RPC Response Structure
   "result": {
     "success": true
   },
-  "id": "c6a5207b-5960-4e22-952c-ec83a3caa952"
+  "id": "1"
 }
 ```
 

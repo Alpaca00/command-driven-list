@@ -15,7 +15,7 @@ class DragCommand extends Command {
   DragCommand(this.startX, this.startY, this.endX, this.endY, this.duration);
 
   @override
-  String get kind => 'dragAndDrop';
+  String get kind => 'dragAndDropWithCommandExtension';
 
   DragCommand.deserialize(Map<String, String> params)
       : startX = double.parse(params['startX']!),
@@ -57,7 +57,7 @@ class DragCommandExtension extends CommandExtension {
   }
 
   @override
-  String get commandKind => 'dragAndDrop';
+  String get commandKind => 'dragAndDropWithCommandExtension';
 
   @override
   Command deserialize(
