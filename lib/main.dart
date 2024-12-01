@@ -1,9 +1,9 @@
-import 'package:demo/get_text_command.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_driver/driver_extension.dart';
 import 'package:flutter_driver/src/extension/extension.dart';
 
-import 'extended_commands.dart';
+import 'drag_commands.dart';
+import 'get_text_command.dart';
 
 void main() {
   enableFlutterDriverExtension(commands: [DragCommandExtension(), GetTextCommandExtension()]);

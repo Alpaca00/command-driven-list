@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_driver/driver_extension.dart';
@@ -36,9 +35,6 @@ class FinderHelper {
     try {
       // Decode base64 to JSON string
       final jsonStr = Base64URL.decode(base64Str);
-      if (kDebugMode) {
-        print('decoded string: $jsonStr');
-      }
 
       // Parse JSON
       final dynamic finderData = json.decode(jsonStr);
@@ -104,37 +100,8 @@ class FinderHelper {
 }
 
 class GetTextCommandExtension extends CommandExtension {
-  String getTextFromWidget(Text widget) {
-    // If direct text data is available, return it
-    if (widget.data != null) {
-      return widget.data!;
-    }
-    // Otherwise get text from textSpan
-    if (widget.textSpan != null) {
-      return getTextFromTextSpan(widget.textSpan!);
-    }
-    return 'TEXT_NOT_FOUND';
-  }
-
-  String getTextFromTextSpan(InlineSpan span) {
-    if (span is TextSpan) {
-      final List<String> textParts = <String>[];
-
-      // Add current text if not null
-      if (span.text != null) {
-        textParts.add(span.text!);
-      }
-
-      // Add children's text recursively
-      if (span.children != null) {
-        for (final InlineSpan child in span.children!) {
-          textParts.add(getTextFromTextSpan(child));
-        }
-      }
-
-      return textParts.join('');
-    }
-    return 'WIDGET_IS_NOT_TEXT_SPAN';
+  String? getTextFromWidget(Text widget) {
+    return widget.data ?? widget.textSpan?.toPlainText();
   }
 
   @override
@@ -156,16 +123,21 @@ class GetTextCommandExtension extends CommandExtension {
     // Get the widget element
     final Element element = prober.element(finder);
 
-    // Get text data from Text widget
-    String textData = '';
-
-    if (element.widget is Text) {
-      textData = getTextFromWidget(element.widget as Text);
-    } else {
-      textData = 'Found element is not a Text widget';
+    // if element is not a Text widget, return false with error
+    if (element.widget is! Text) {
+      return const GetTextResult(false, data: {
+        'errorCode': 'NOT_A_TEXT_WIDGET',
+        'error': 'Found element is not a Text widget'
+      });
     }
 
-    return GetTextResult(true, data: {'text': textData});
+    final text = getTextFromWidget(element.widget as Text);
+    return text != null
+        ? GetTextResult(true, data: {'text': text})
+        : const GetTextResult(false, data: {
+            'errorCode': 'NO_TEXT_CONTENT',
+            'error': 'No text content found'
+          });
   }
 
   @override
@@ -176,10 +148,6 @@ class GetTextCommandExtension extends CommandExtension {
       Map<String, String> params,
       DeserializeFinderFactory finderFactory,
       DeserializeCommandFactory commandFactory) {
-    if (kDebugMode) {
-      print('Available keys: ${params.keys.toList()}');
-      print('Params content: $params');
-    }
     return GetTextCommand.deserialize(params);
   }
 }
