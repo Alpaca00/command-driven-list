@@ -16,12 +16,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Driver Drag & Drop Demo',
+      title: 'Command Extension Example',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Driver Drag & Drop'),
+      home: const MyHomePage(title: 'Command Extension Example'),
     );
   }
 }
